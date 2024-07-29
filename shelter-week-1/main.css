@@ -90,6 +90,14 @@ h1 {
     color: var(--color-light-s);
 }
 
+.logo {
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
 .title {
     margin-bottom: 3px;
     color: var(--color-primary);
@@ -508,6 +516,11 @@ h5 {
     display: inline-block;
     vertical-align: middle;
     color: var(--color-primary, #F1CDB3);
+    transition: color 0.3s ease;
+}
+
+.footer-h4:hover {
+    color:var(--color-primary-light, #FDDCC4);
 }
 
 .phone-img {

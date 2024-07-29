@@ -113,10 +113,20 @@ span {
     color: var(--color-dark-3xl, #292929);
 }
 
+.logo {
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
 .title {
     font-family: var(--font-family);
     color: var(--color-dark-l, #545454);
 }
+
+
 
 .subtitle {
     font-family: var(--second-family);
@@ -128,6 +138,7 @@ span {
     margin-left: 4px;
     color: var(--color-dark-3xl, #292929);
 }
+
 
 .pets-content {
     padding: 80px 40px 100px;
@@ -323,10 +334,18 @@ span {
     margin-right: 20px;
 }
 
+
+
 .footer-h4 {
     display: inline-block;
     vertical-align: middle;
     color: var(--color-primary, #F1CDB3);
+    transition: color 0.3s ease;
+}
+
+
+.footer-h4:hover {
+    color:var(--color-primary-light, #FDDCC4);
 }
 
 .phone-img {

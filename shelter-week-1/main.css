@@ -29,9 +29,13 @@ html {
 
 
 .content {
-    width: 100%;
     margin: 0 auto;
-    max-width: 1280px;
+    max-width: 75rem;
+}
+
+.container {
+    width: 100%;
+    padding: 5rem 0 6.25rem;
 }
 
 
@@ -48,16 +52,15 @@ h1 {
     background: url('assets/img/noise_transparent@2x.png'), radial-gradient(100% 215.42% at 0% 0%, #5b483a 0%, #262425 70%),
         #211f20;
     background-position: 0% 0%;
-
+padding: 1.875rem 0 0;
 
 }
 
 .header {
-    padding: 30px 40px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 90px;
+    height: 60px;
 }
 
 
@@ -119,7 +122,7 @@ a {
 }
 
 .start-screen {
-    padding: 91px 40px 0;
+    padding-top: 5.688rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -131,9 +134,18 @@ a {
 
     align-items: flex-start;
     gap: 42px;
-    padding-top: 163px;
+    padding-top: 10.188rem;
     width: 460px;
+}
 
+.not-only-puppy {
+max-width: 698px;
+max-height: 728px;
+}
+
+.about-pets {
+    width: 300px;
+height: 408px;
 }
 
 h2 {
@@ -167,7 +179,6 @@ h2 {
 
 }
 
-
 .button:hover {
     background: var(--color-primary-light, #FDDCC4);
 }
@@ -180,7 +191,7 @@ h2 {
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
-    padding: 80px 215px 100px;
+    
     gap: 120px;
 }
 
@@ -189,6 +200,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     gap: 25px;
+    width: 430px;
 
 }
 
@@ -218,8 +230,6 @@ h3 {
 }
 
 .our-friends-content {
-    padding: 78px 40px 100px;
-    ;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -231,13 +241,16 @@ h3 {
     background: var(--color-light-l, #F6F6F6);
 }
 
-.pets-card {
+.cards {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     gap: 90px;
-
+}
+.pets-card {
+    display: flex;
+    align-items: center;
+    gap: 53px;
 }
 
 .pet-text {
@@ -262,15 +275,6 @@ h3 {
     cursor: pointer;
 }
 
-.slider-left {
-    margin-right: -38px;
-}
-
-.slider-right {
-    margin-left: -38px;
-}
-
-
 .card {
     display: flex;
     flex-direction: column;
@@ -280,7 +284,7 @@ h3 {
     padding-bottom: 30px;
     border-radius: 9px;
     background: var(--color-light-s, #FAFAFA);
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
 
 }
 
@@ -288,6 +292,7 @@ h3 {
 .card:hover {
     background: var(--color-light-xl, #FFF);
     cursor: pointer;
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 }
 
 .pets-image {
@@ -356,7 +361,6 @@ h3 {
 }
 
 .help-content {
-    padding: 81px 125px 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -408,7 +412,6 @@ h4 {
 }
 
 .in-addiction-content {
-    padding: 80px 182px 100px 183px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -454,6 +457,7 @@ h5 {
     background: var(--color-primary, #F1CDB3);
     padding: 10px 15px;
     transition: background 0.3s ease;
+    
 
 }
 
@@ -465,6 +469,11 @@ h5 {
 .credit-card {
     fill: var(--color-dark-3xl, #292929);
     color: var(--color-dark-l, #545454);
+    
+}
+
+.number {
+    white-space: nowrap;
 }
 
 .lorem-ipsum {
@@ -479,42 +488,53 @@ h5 {
 .footer {
     background: url('assets/img/noise_transparent@2x.png'), radial-gradient(circle at left center, #513D2F 0%, #1A1A1C 100%), #211F20;
     background-position-y: 50%;
+    padding: 2.5rem 2.5rem 0;
 }
 
 .footer-content {
-    padding: 40px 40px 0;
     display: flex;
-    justify-content: space-between;
-    gap: 160px;
-
+    justify-content: center;
+    gap: 160px;   
 }
 
+.footer-text-content {
+    display: flex;
+    gap: 160px
+}
 
+.footer-puppy {
+    width: 300px;
+    height: 310px;
+}
 .info {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 40px;
     margin: 16px 0 60px;
+    max-width: 280px;
+    white-space: nowrap;
+}
+.loc {
+    margin-right: 7px;
+    gap: 30px;
+    justify-content: space-between;
+    max-width: 295px;
 }
 
-.location {
-    margin: -15px 0 0 -6px;
+.info-link {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .footer-h3 {
     color: var(--color-light-xl, #FFF);
 }
 
-.mail-img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
-}
 
 .footer-h4 {
-    display: inline-block;
-    vertical-align: middle;
     color: var(--color-primary, #F1CDB3);
     transition: color 0.3s ease;
 }
@@ -523,14 +543,103 @@ h5 {
     color:var(--color-primary-light, #FDDCC4);
 }
 
-.phone-img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
+@media (min-width: 768px) and (max-width: 1279px) {
+    .content {
+      width: 100%;
+    }
+    .header {
+        white-space: nowrap;  
+    }
+    .container {
+        padding: 30px 30px 0;
+    }
+    .start-screen {
+        padding: 60px 70px 0;
+        flex-direction:column;
+    }
+    .not-only-puppy {
+        padding-top: 100px;
+        margin: 0 -70px 0 70px;      
+        object-fit: contain;
+        box-sizing: content-box;
+        width: 569px;
+        height: 593px;
+        align-self: flex-end;
+    }
+    .not-only-content {
+        width: 100%;
+        padding: 0 54px 0 55px;
+
+    }
+    .button {
+        align-self: center;
+    }
+    .about-content {
+        flex-direction: column;
+        gap: 80px;
+       align-items: center;
+        
+    }
+    .about {
+        padding: 80px 169px 100px 169px;
+    }
+    .about-pets {
+        align-self: center;
+    }
+    .about-content-text {
+     
+    }
+    .our-friends {
+        padding: 80px 30px 100px;
+    }
+    .pets-card {
+        gap: 12px;
+        
+    }
+    .cards {
+        overflow: hidden;
+        max-width: 580px;
+        gap: 40px;
+    }
+    .help {
+        padding: 80px 69px 100px;
+        
+    }
+    .svg-list {
+        gap: 55px 60px;
+    }
+    .svg-item {
+        width: 170px;
+    height: 113px;
+    }
+    .in-addiction {
+        padding: 80px 132px 100px 131px;
+    }
+    .in-addiction-content {
+        
+        flex-wrap:wrap-reverse;
+        gap: 60px;
+    }
+.footer-content {
+   flex-wrap: wrap;     
+}
+.footer-text-content {
+    display:flex;
+    gap: 60px;
+    flex-wrap: nowrap;
+    margin-right: 7px;
 }
 
-.location-img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
+.loc {
+    gap: 33px;
+}
+
+}
+
+
+@media(max-width:1280px) {
+    .content {
+        width: 100%;
+    }
+    
 }

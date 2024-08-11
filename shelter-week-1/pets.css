@@ -27,12 +27,13 @@ html {
     box-sizing: border-box;
 }
 
-
+.container {
+    min-width: 1280px;
+}
 
 .content {
-    width: 100%;
     margin: 0 auto;
-    max-width: 1280px;
+    width: 1280px;
 }
 
 a {
@@ -158,7 +159,7 @@ span {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 25px 40px;
+    gap: 28px;
     padding: 14px 0;
 }
 
@@ -176,13 +177,14 @@ span {
     padding-bottom: 30px;
     border-radius: 9px;
     background: var(--color-light-s, #FAFAFA);
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
     overflow: hidden;
 }
 
 .card:hover {
     background: var(--color-light-xl, #FFF);
     cursor: pointer;
+    box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 }
 
 .pets-image {
@@ -307,12 +309,23 @@ span {
 }
 
 .info {
-    margin-top: 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 40px;
-    padding-bottom: 60px;
+    margin: 16px 0 60px;
+}
+.loc {
+    margin-right: 7px;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.info-link {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .footer-h3 {
@@ -320,25 +333,7 @@ span {
 
 }
 
-.second {
-    margin-bottom: -9px;
-}
-
-.location-link {
-    margin-bottom: -5px;
-}
-
-.mail-img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
-}
-
-
-
 .footer-h4 {
-    display: inline-block;
-    vertical-align: middle;
     color: var(--color-primary, #F1CDB3);
     transition: color 0.3s ease;
 }
@@ -346,16 +341,4 @@ span {
 
 .footer-h4:hover {
     color:var(--color-primary-light, #FDDCC4);
-}
-
-.phone-img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
-}
-
-.location-img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
 }

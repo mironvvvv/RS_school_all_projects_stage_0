@@ -701,7 +701,6 @@ h5 {
 
     }
 
-    .about-content-text {}
 
     .in-addiction-content {
         flex-wrap: wrap-reverse;
@@ -759,6 +758,7 @@ h5 {
         /* 35.2px */
         letter-spacing: 1.92px;
         margin-bottom: 10px;
+        
     }
 
     .subtitle {
@@ -1047,8 +1047,6 @@ h5 {
 
 
 }
-
-@media (max-width:640px) {}
 
 @media (max-width:400px) {
     .svg-list {

@@ -556,7 +556,7 @@ h5 {
 
 @media (max-width: 1279px) {
     .container {
-        padding: 10.41666666666vw 5.208333333vw 13.02083333333vw;
+        padding: 80px 5.208333333vw 100px;
     }
 
     .content {
@@ -599,7 +599,7 @@ h5 {
     }
 
     .svg-list {
-        gap: 55px 60px;
+        gap: 7.16145833333vw 7.8125vw;
     }
 
     .svg-item {
@@ -656,7 +656,7 @@ h5 {
 
 @media(max-width:1000px) {
     .container {
-        padding: 10.4166666666vw 3.90625vw 13.020833333vw;
+        padding: 80px 3.90625vw 100px;
     }
 
     .background-container {
@@ -884,7 +884,7 @@ h5 {
     }
 
     .help {
-        padding: 42px 15px;
+        padding: 13.125vw 4.6875vw;
     }
 
     .svg-item {
@@ -1009,7 +1009,7 @@ h5 {
     }
 }
 
-@media (max-width:720px) {
+@media (max-width:767.5px) {
     .nav-list {
         display: none;
     }
@@ -1033,18 +1033,12 @@ h5 {
         gap: 20.625vw;
     }
 
-
-
-
     .info-link {
         display: flex;
         align-items: center;
         text-decoration: none;
         color: inherit;
     }
-
-
-
 
 }
 

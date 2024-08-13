@@ -436,11 +436,13 @@ span {
     .info {
         width: 36.328125vw;
         margin: 0;
+        margin-top: 4px;
     }
 
     .location {
         width: 39.32291666vw;
         margin: 0;
+        margin-top: 4px;
     }
 
     .footer {
@@ -450,6 +452,7 @@ span {
 
     .footer-puppy {
         align-self: center;
+        margin-top:5px;
     }
 
 }
@@ -572,6 +575,7 @@ span {
         width: 87.1875vw;
         margin: 0;
         align-items: center;
+        
     }
 
     .location {

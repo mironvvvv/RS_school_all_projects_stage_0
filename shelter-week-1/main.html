@@ -24,7 +24,6 @@
                     <span></span>
                     <span></span>
                 </div>
-
                 <ul class="nav-list">
                     <li class="nav-item"><a href="main.html" aria-current="page"
                             class="nav-link-active paragraph-l">About the shelter</a></li>
@@ -33,6 +32,7 @@
                     <li class="nav-item"><a href="#contacts" class="nav-link paragraph-l">Contacts</a></li>
                 </ul>
             </nav>
+            
         </header>
         <section class="start-screen content">
 
@@ -84,7 +84,7 @@
                     <div class="slider-left">
                         <img class="button-arrow left" src="assets/svg/Arrow.svg" alt="Arrow">
                     </div>
-                    <div class="cards">
+                    <div class="cards" id="carousel">
                         <div class="card">
                             <img class="pets-image" src="assets/img/pets-katrine.png" alt="Cat Katrine">
                             <p class="pet-name">Katrine</p>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <div class="slider-right">
-                        <img class="button-arrow" src="assets/svg/Arrow.svg" alt="arrow">
+                        <img class="button-arrow right" src="assets/svg/Arrow.svg" alt="arrow">
                     </div>
                 </div>
                 <a href="pets.html" class="button-our-friends button">Get to know the rest</a>
@@ -212,6 +212,29 @@
         </div>
     </footer>
 
+    <section class="modal" id="modal">
+        <div class="modal-content">
+          <img class="close-btn" id="close-btn"  src="assets/svg/icon-krest.svg">
+          <div class="modal-body">
+            <div class="modal-image">
+              <img id="modal-img" src="" alt="Pet image">
+            </div>
+            <div class="modal-info">
+              <h3 id="modal-title"></h3>
+              <p id="modal-subtitle"></p>
+              <p id="modal-description"></p>
+              <ul class="modal-details">
+                <li><strong>Age:</strong> <span id="modal-age"></span></li>
+                <li><strong>Inoculations:</strong> <span id="modal-inoculations"></span></li>
+                <li><strong>Diseases:</strong> <span id="modal-diseases"></span></li>
+                <li><strong>Parasites:</strong> <span id="modal-parasites"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </section>
+
+<script src="main.js"></script>
 </body>
 
 </html>

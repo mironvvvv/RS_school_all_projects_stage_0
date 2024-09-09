@@ -3,20 +3,21 @@ const navbar = document.querySelector('.navbar');
 const overlay = document.querySelector('.overlay');
 const body = document.body;
 
-
 function toggleMenu() {
     burgerMenu.classList.toggle('burger-open');
     navbar.classList.toggle('active');
     overlay.classList.toggle('active');
-    body.classList.toggle('no-scroll');
+    
+
+    if (navbar.classList.contains('active')) {
+      body.style.overflow = 'hidden';  
+  } else {
+      body.style.overflow = 'auto'; 
+  }
 }
 
-
 burgerMenu.addEventListener('click', toggleMenu);
-
-
 overlay.addEventListener('click', toggleMenu);
-
 
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', toggleMenu);
@@ -95,6 +96,7 @@ function updatePage() {
 
    
     updatePaginationButtons();
+    assignCardEventHandlers();
 }
 
 function updatePaginationButtons() {
@@ -373,24 +375,26 @@ const modalInoculations = document.getElementById('modal-inoculations');
 const modalDiseases = document.getElementById('modal-diseases');
 const modalParasites = document.getElementById('modal-parasites');
 
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('click', function () {
-    const petName = this.querySelector('.pet-name').textContent;
-    const petInfo = petsInfo[petName];
-    if (petInfo) {
-      modalTitle.textContent = petInfo.title;
-      modalSubtitle.textContent = petInfo.subtitle;
-      modalDescription.textContent = petInfo.description;
-      modalImage.src = petInfo.image;
-      modalAge.textContent = petInfo.age;
-      modalInoculations.textContent = petInfo.inoculations;
-      modalDiseases.textContent = petInfo.diseases;
-      modalParasites.textContent = petInfo.parasites;
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden'; 
-    }
-  });
-});
+function assignCardEventHandlers() {
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function () {
+            const petName = this.querySelector('.pet-name').textContent;
+            const petInfo = petsInfo[petName];
+            if (petInfo) {
+                modalTitle.textContent = petInfo.title;
+                modalSubtitle.textContent = petInfo.subtitle;
+                modalDescription.textContent = petInfo.description;
+                modalImage.src = petInfo.image;
+                modalAge.textContent = petInfo.age;
+                modalInoculations.textContent = petInfo.inoculations;
+                modalDiseases.textContent = petInfo.diseases;
+                modalParasites.textContent = petInfo.parasites;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+}
 
 closeModalBtn.addEventListener('click', function () {
   modal.style.display = 'none';

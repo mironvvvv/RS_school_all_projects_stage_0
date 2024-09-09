@@ -3,25 +3,25 @@ const navbar = document.querySelector('.navbar');
 const overlay = document.querySelector('.overlay');
 const body = document.body;
 
-
 function toggleMenu() {
     burgerMenu.classList.toggle('burger-open');
     navbar.classList.toggle('active');
     overlay.classList.toggle('active');
-    body.classList.toggle('no-scroll');
+    
+
+    if (navbar.classList.contains('active')) {
+      body.style.overflow = 'hidden';  
+  } else {
+      body.style.overflow = 'auto'; 
+  }
 }
 
-
 burgerMenu.addEventListener('click', toggleMenu);
-
-
 overlay.addEventListener('click', toggleMenu);
-
 
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', toggleMenu);
 });
-
 
 const pets = [
     { name: "Katrine", img: "assets/img/pets-katrine.png" },
@@ -49,7 +49,6 @@ function getCardsPerSlide() {
     }
 }
 
-
 function shuffle(array) {
     let shuffledArray = array.slice();
     for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -59,7 +58,6 @@ function shuffle(array) {
     return shuffledArray;
 }
 
-
 function createSlide(petArray) {
     carousel.innerHTML = petArray.map(pet => `
         <div class="card">
@@ -68,8 +66,10 @@ function createSlide(petArray) {
             <button class="pets-button">Learn more</button>
         </div>
     `).join('');
+    
+    
+    assignCardEventHandlers();
 }
-
 
 function updateSlide() {
     let availablePets = shuffle(pets).filter(pet => !currentSlide.includes(pet));
@@ -77,32 +77,25 @@ function updateSlide() {
     createSlide(currentSlide);
 }
 
-
 function moveSlide(direction) {
     const totalPets = pets.length;
-    
-    
+
     if (direction === 'right') {
         slideIndex = (slideIndex + cardsPerSlide) % totalPets;
-    }
-    
-    else if (direction === 'left') {
+    } else if (direction === 'left') {
         slideIndex = (slideIndex - cardsPerSlide + totalPets) % totalPets;
     }
-    
+
     updateSlide();
 }
 
-
 document.querySelector('.left').addEventListener('click', () => moveSlide('left'));
 document.querySelector('.right').addEventListener('click', () => moveSlide('right'));
-
 
 window.addEventListener('resize', () => {
     cardsPerSlide = getCardsPerSlide();
     updateSlide();
 });
-
 
 updateSlide();
 
@@ -201,33 +194,36 @@ const modalInoculations = document.getElementById('modal-inoculations');
 const modalDiseases = document.getElementById('modal-diseases');
 const modalParasites = document.getElementById('modal-parasites');
 
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('click', function () {
-    const petName = this.querySelector('.pet-name').textContent;
-    const petInfo = petsInfo[petName];
-    if (petInfo) {
-      modalTitle.textContent = petInfo.title;
-      modalSubtitle.textContent = petInfo.subtitle;
-      modalDescription.textContent = petInfo.description;
-      modalImage.src = petInfo.image;
-      modalAge.textContent = petInfo.age;
-      modalInoculations.textContent = petInfo.inoculations;
-      modalDiseases.textContent = petInfo.diseases;
-      modalParasites.textContent = petInfo.parasites;
-      modal.style.display = 'block';
-      document.body.style.overflow = 'hidden'; 
-    }
-  });
-});
+
+function assignCardEventHandlers() {
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function () {
+            const petName = this.querySelector('.pet-name').textContent;
+            const petInfo = petsInfo[petName];
+            if (petInfo) {
+                modalTitle.textContent = petInfo.title;
+                modalSubtitle.textContent = petInfo.subtitle;
+                modalDescription.textContent = petInfo.description;
+                modalImage.src = petInfo.image;
+                modalAge.textContent = petInfo.age;
+                modalInoculations.textContent = petInfo.inoculations;
+                modalDiseases.textContent = petInfo.diseases;
+                modalParasites.textContent = petInfo.parasites;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden'; 
+            }
+        });
+    });
+}
 
 closeModalBtn.addEventListener('click', function () {
-  modal.style.display = 'none';
-  document.body.style.overflow = 'auto'; 
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; 
 });
 
 window.addEventListener('click', function (event) {
-  if (event.target === modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+    if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 });

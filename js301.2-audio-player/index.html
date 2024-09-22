@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Music Player</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="assets/video/121573-724710197_tiny.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="player">
+        <div class="track-info">
+            <h2 id="track-title">Track Title</h2>
+            <p id="track-artist">Artist Name</p>
+        </div>
+        <img id="track-image" src="default-image.jpg" alt="Track Image" class="track-image">
+        <audio id="audio"></audio>
+        <div class="controls">
+            <button id="prev-btn">⏮</button>
+            <button id="play-pause-btn" class="play">▶️</button>
+            <button id="next-btn">⏭</button>
+        </div>
+        <div class="progress-bar-container">
+            <span id="current-time">0:00</span>
+            <input type="range" id="progress-bar" value="0" max="100">
+            <span id="duration">0:00</span>
+        </div>
+    </div>
+
+    <footer>
+        <div>© 2024 <a href="https://github.com/mironvvvv" class="github-nav-link">mironvvvv</a></div>
+            <a href="https://rs.school/courses/javascript-preschool-ru" class="logo"></a>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

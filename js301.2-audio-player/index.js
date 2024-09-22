@@ -14,19 +14,19 @@ const tracks = [
     {
         title: "Creep",
         artist: "Radiohead",
-        src: "assets/audio/rediohead-creep.mp3",
+        src: "assets/audio/radiohead-creep.mp3",
         image: "assets/img/creep.png"
     },
     {
         title: "Karma Police",
         artist: "Radiohead",
-        src: "assets/audio/karma-police.mp3",
+        src: "assets/audio/radiohead-karma-police.mp3",
         image: "assets/img/karma-police.jpg"
     },
     {
         title: "No suprises",
         artist: "Radiohead",
-        src: "assets/audio/no-suprises.mp3",
+        src: "assets/audio/radiohead-no-surprises.mp3",
         image: "assets/img/no-suprises.jpg"
     }
 ];
@@ -42,8 +42,10 @@ function loadTrack(index) {
     trackImage.src = track.image;
     backgroundBlur.style.backgroundImage = `url(${track.image})`; // Меняем задний фон
     audio.load();
-    isPlay = false;  // Останавливаем воспроизведение при загрузке нового трека
-    playPauseBtn.textContent = '▶️'; 
+    if (isPlay) {
+        audio.play();  // Если музыка уже играла, продолжаем воспроизведение
+        playPauseBtn.textContent = '⏸';
+    }
 }
 
 function playPauseTrack() {

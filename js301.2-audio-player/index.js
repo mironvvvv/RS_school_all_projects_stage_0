@@ -8,7 +8,6 @@ const durationElement = document.getElementById('duration');
 const trackTitle = document.getElementById('track-title');
 const trackArtist = document.getElementById('track-artist');
 const trackImage = document.getElementById('track-image');
-const backgroundBlur = document.querySelector('.background-blur');
 
 const tracks = [
     {
@@ -24,7 +23,7 @@ const tracks = [
         image: "assets/img/karma-police.jpg"
     },
     {
-        title: "No suprises",
+        title: "No Surprises",
         artist: "Radiohead",
         src: "assets/audio/radiohead-no-surprises.mp3",
         image: "assets/img/no-suprises.jpg"
@@ -40,12 +39,16 @@ function loadTrack(index) {
     trackArtist.textContent = track.artist;
     audio.src = track.src;
     trackImage.src = track.image;
-    backgroundBlur.style.backgroundImage = `url(${track.image})`; // Меняем задний фон
+    
     audio.load();
-    if (isPlay) {
-        audio.play();  // Если музыка уже играла, продолжаем воспроизведение
-        playPauseBtn.textContent = '⏸';
-    }
+    audio.currentTime = 0; 
+
+    
+    progressBar.value = 0;
+    currentTimeElement.textContent = '0:00';
+    durationElement.textContent = '0:00'; 
+    
+    updateProgressBar();
 }
 
 function playPauseTrack() {
@@ -65,16 +68,18 @@ function playPauseTrack() {
 }
 
 function updateProgressBar() {
-    const progressPercent = (audio.currentTime / audio.duration) * 100;
-    progressBar.value = progressPercent;
+    if (audio.duration) { 
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progressPercent;
 
-    const currentMinutes = Math.floor(audio.currentTime / 60);
-    const currentSeconds = Math.floor(audio.currentTime % 60);
-    currentTimeElement.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+        const currentMinutes = Math.floor(audio.currentTime / 60);
+        const currentSeconds = Math.floor(audio.currentTime % 60);
+        currentTimeElement.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
 
-    const durationMinutes = Math.floor(audio.duration / 60);
-    const durationSeconds = Math.floor(audio.duration % 60);
-    durationElement.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+        const durationMinutes = Math.floor(audio.duration / 60);
+        const durationSeconds = Math.floor(audio.duration % 60);
+        durationElement.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+    }
 }
 
 function setProgress(e) {
@@ -87,23 +92,24 @@ function setProgress(e) {
 function nextTrack() {
     trackIndex = (trackIndex + 1) % tracks.length;
     loadTrack(trackIndex);
-    audio.play();  // Автоматически запускаем воспроизведение
-    isPlay = true; // Обновляем флаг, чтобы кнопка Play/Pause была в правильном состоянии
-    playPauseBtn.textContent = '⏸';  // Меняем текст кнопки
 }
 
 function prevTrack() {
     trackIndex = (trackIndex - 1 + tracks.length) % tracks.length;
     loadTrack(trackIndex);
-    audio.play();  // Автоматически запускаем воспроизведение
-    isPlay = true; // Обновляем флаг
-    playPauseBtn.textContent = '⏸';  // Меняем текст кнопки
 }
 
 playPauseBtn.addEventListener('click', playPauseTrack);
-nextBtn.addEventListener('click', nextTrack);
-prevBtn.addEventListener('click', prevTrack);
+nextBtn.addEventListener('click', () => {
+    nextTrack();
+    if (isPlay) audio.play();
+});
+prevBtn.addEventListener('click', () => {
+    prevTrack();
+    if (isPlay) audio.play(); 
+});
 audio.addEventListener('timeupdate', updateProgressBar);
 progressBar.addEventListener('input', setProgress);
+audio.addEventListener('loadedmetadata', updateProgressBar); 
 
 loadTrack(trackIndex);

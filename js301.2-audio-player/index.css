@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    
     background-color: #f0f0f0;
     text-align: center;
     margin: 0;
@@ -23,15 +23,22 @@ body {
 }
 
 .player {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
+    background-color: rgba(42, 17, 1, 0);
+    border-radius: 30px;
     padding: 20px;
     width: 300px;
     margin: 50px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px 12px rgb(99 28 1 / 76%);
 }
-
+#track-title {
+    font-family:"Sofadi One", system-ui;
+    letter-spacing: 2px;
+}
+#track-artist {
+    font-family: "Kanit", sans-serif;
+    letter-spacing: 3px;
+     
+}
 .track-info {
     margin-bottom: 20px;
 }
@@ -44,29 +51,57 @@ body {
 
 .controls {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+    align-items: center;
+    gap:15px;
     margin-bottom: 20px;
 }
-
-button {
-    background-color: transparent;
-    border: none;
-    font-size: 24px;
+img {
     cursor: pointer;
+    color:#000;
 }
 
 button:focus {
     outline: none;
 }
+.arrow-right {
+    
+    border-radius: 16px;
+    padding:7px;
+    height: 24px;
+    transform: rotate(180deg);
+    box-shadow: 0 0 15px 4px rgb(58 14 3 / 80%);
+    transition: background 0.3s ease;
+    
+}
+.arrow-right:hover {
+    background:rgba(250, 242, 239, 0.36); 
+} 
 
-.play {
-    background-color: #00b894;
-    color: white;
+.play-pause {
+        border-radius: 20px;
+        padding: 9px;
+        box-shadow: 0 0 15px 4px rgb(58 14 3 / 80%);
+        transition: background 0.3s ease;
+}
+.play-pause:hover {
+    background:rgba(250, 242, 239, 0.36); 
+}
+.arrow-left {
+    
+    border-radius: 16px;
+    padding: 7px;
+    height:24px;
+    box-shadow: 0 0 15px 4px rgb(58 14 3 / 80%);
+    transition: background 0.3s ease;
+}
+.arrow-left:hover {
+    background:rgba(250, 242, 239, 0.36); 
 }
 
+
 .pause {
-    background-color: #d63031;
-    color: white;
+    background-color: rgba(250, 242, 239, 0.36);
 }
 
 .progress-bar-container {
@@ -78,7 +113,92 @@ button:focus {
 #progress-bar {
     width: 70%;
     cursor: pointer;
+    
 }
+#progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px; 
+    background: rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px; 
+    background: rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px; 
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(58, 14, 3, 0.8); 
+    box-shadow: 0 0 15px 4px rgb(58, 14, 3 / 80%);
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    margin-top: -4px;
+}
+
+#progress-bar::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgb(58, 14, 3, 0.8);
+    box-shadow: 0 0 15px 4px rgb(58, 14, 3 / 80%);
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    margin-top: -4px; 
+}
+
+#progress-bar::-ms-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgb(58, 14, 3, 0.8);
+    box-shadow: 0 0 15px 4px rgb(58, 14, 3 / 80%);
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    margin-top: -4px; 
+}
+
+
+#progress-bar::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, rgb(58, 14, 3, 0.61) var(--progress-percent), rgba(0, 0, 0, 0.1) var(--progress-percent));
+    border-radius: 10px;
+}
+
+#progress-bar::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, rgb(58, 14, 3, 0.61) var(--progress-percent), rgba(0, 0, 0, 0.1) var(--progress-percent));
+    border-radius: 10px;
+}
+
+#progress-bar::-ms-fill-lower {
+    background: rgb(58, 14, 3, 0.61); 
+    border-radius: 10px;
+}
+
+#progress-bar::-ms-fill-upper {
+    background: rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+}
+
 
 footer {
     position: fixed;

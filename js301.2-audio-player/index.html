@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kay+Pho+Du:wght@400;500;600;700&family=Sofadi+One&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Custom Music Player</title>
     <link rel="stylesheet" href="index.css">
 </head>
@@ -22,9 +28,9 @@
         <img id="track-image" src="default-image.jpg" alt="Track Image" class="track-image">
         <audio id="audio"></audio>
         <div class="controls">
-            <button id="prev-btn">⏮</button>
-            <button id="play-pause-btn" class="play">▶️</button>
-            <button id="next-btn">⏭</button>
+            <img class="arrow-right" id="prev-btn" src="assets/svg/chevron_right_40dp_531607_FILL0_wght400_GRAD0_opsz40.svg"/>
+            <img class="play-pause" id="play-pause-btn" src="assets/svg/play_arrow_40dp_531607_FILL0_wght400_GRAD0_opsz40.svg"/>
+            <img class="arrow-left" id="next-btn" src="assets/svg/chevron_right_40dp_531607_FILL0_wght400_GRAD0_opsz40.svg"/>
         </div>
         <div class="progress-bar-container">
             <span id="current-time">0:00</span>

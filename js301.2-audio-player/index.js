@@ -55,15 +55,16 @@ function playPauseTrack() {
     if (!isPlay) {
         audio.play();
         isPlay = true;
+        playPauseBtn.src = 'assets/svg/pause.svg';
         playPauseBtn.classList.add('pause');
         playPauseBtn.classList.remove('play');
-        playPauseBtn.textContent = '⏸';
     } else {
         audio.pause();
         isPlay = false;
+        playPauseBtn.src = 'assets/svg/play_arrow_40dp_531607_FILL0_wght400_GRAD0_opsz40.svg';
         playPauseBtn.classList.add('play');
         playPauseBtn.classList.remove('pause');
-        playPauseBtn.textContent = '▶️';
+        
     }
 }
 
@@ -71,6 +72,8 @@ function updateProgressBar() {
     if (audio.duration) { 
         const progressPercent = (audio.currentTime / audio.duration) * 100;
         progressBar.value = progressPercent;
+
+        progressBar.style.setProperty('--progress-percent', `${progressPercent}%`);
 
         const currentMinutes = Math.floor(audio.currentTime / 60);
         const currentSeconds = Math.floor(audio.currentTime % 60);
@@ -82,6 +85,7 @@ function updateProgressBar() {
     }
 }
 
+
 function setProgress(e) {
     const width = this.clientWidth;
     const clickX = e.offsetX;
@@ -92,11 +96,13 @@ function setProgress(e) {
 function nextTrack() {
     trackIndex = (trackIndex + 1) % tracks.length;
     loadTrack(trackIndex);
+    if (isPlay) audio.play();
 }
 
 function prevTrack() {
     trackIndex = (trackIndex - 1 + tracks.length) % tracks.length;
     loadTrack(trackIndex);
+    if (isPlay) audio.play();
 }
 
 playPauseBtn.addEventListener('click', playPauseTrack);
@@ -108,8 +114,52 @@ prevBtn.addEventListener('click', () => {
     prevTrack();
     if (isPlay) audio.play(); 
 });
+
+progressBar.addEventListener('input', function() {
+    const progressPercent = this.value;
+    const newTime = (progressPercent / 100) * audio.duration; 
+    audio.currentTime = newTime; 
+});
+
+
 audio.addEventListener('timeupdate', updateProgressBar);
-progressBar.addEventListener('input', setProgress);
-audio.addEventListener('loadedmetadata', updateProgressBar); 
+
+function updateProgressBar() {
+    if (audio.duration) {
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = progressPercent;
+
+        
+        progressBar.style.setProperty('--progress-percent', `${progressPercent}%`);
+
+       
+        const currentMinutes = Math.floor(audio.currentTime / 60);
+        const currentSeconds = Math.floor(audio.currentTime % 60);
+        currentTimeElement.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+
+        const durationMinutes = Math.floor(audio.duration / 60);
+        const durationSeconds = Math.floor(audio.duration % 60);
+        durationElement.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+    }
+}
+
+
+function loadTrack(index) {
+    const track = tracks[index];
+    trackTitle.textContent = track.title;
+    trackArtist.textContent = track.artist;
+    audio.src = track.src;
+    trackImage.src = track.image;
+    
+    audio.load();
+    audio.currentTime = 0; 
+    
+    progressBar.value = 0; 
+    currentTimeElement.textContent = '0:00';
+    durationElement.textContent = '0:00'; 
+    
+    updateProgressBar(); 
+}
+ 
 
 loadTrack(trackIndex);

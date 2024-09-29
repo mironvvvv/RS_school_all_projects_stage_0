@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+  }
+  main {
+    flex: 1; 
+  }
+  
+  header {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  #searchInput {
+    width: 60%;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 5px;
+  }
+  
+  #clearButton {
+    font-size: 1.2em;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  #photoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  #photoGallery img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  #photoGallery img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+  }
+
+ footer {
+    position:relative;
+    margin-bottom: 10px;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #000;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+.logo {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url(assets/img/rss-logo.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}  

@@ -3,14 +3,15 @@ const scoreDisplay = document.getElementById('score');
 const startButton = document.getElementById('start-btn');
 
 const BOARD_SIZE = 20;
-const SNAKE_SPEED = 200;
+const SNAKE_SPEED = 200; 
 let snake = [{ x: 10, y: 10 }];
 let direction = { x: 0, y: 0 };
 let food = { x: 15, y: 15 };
 let score = 0;
 let gameInterval;
+let badFood = [];
 
-// Инициализация игровой доски
+
 function createBoard() {
   gameBoard.innerHTML = '';
   for (let i = 0; i < BOARD_SIZE * BOARD_SIZE; i++) {
@@ -18,9 +19,10 @@ function createBoard() {
     cell.classList.add('cell');
     gameBoard.appendChild(cell);
   }
+  startButton.style.display = 'block';
 }
 
-// Отображение змейки на доске
+
 function drawSnake() {
   snake.forEach(part => {
     const index = part.y * BOARD_SIZE + part.x;
@@ -29,31 +31,51 @@ function drawSnake() {
   });
 }
 
-// Удаление старых частей змейки перед её обновлением
+
 function clearSnake() {
   [...gameBoard.children].forEach(cell => cell.classList.remove('snake'));
 }
 
-// Движение змейки
+
 function moveSnake() {
   const newHead = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
   snake.unshift(newHead);
 
+ 
   if (newHead.x === food.x && newHead.y === food.y) {
     score += 10;
     scoreDisplay.textContent = score;
-    generateFood();
+    generateFood(); 
+
+    
+    if (score >= 100) {
+      generateBadFood(); 
+    }
   } else {
     snake.pop();
   }
 
+  
+  badFood.forEach((bad) => {
+    if (newHead.x === bad.x && newHead.y === bad.y) {
+      score = Math.max(0, score - 20);
+      scoreDisplay.textContent = score;
+
+      
+      badFood = badFood.filter(b => b !== bad);
+      generateBadFood();
+    }
+  });
+
   if (checkCollision()) {
     clearInterval(gameInterval);
     alert('Game Over! Your score is: ' + score);
+    resetGame(); 
   }
+  
 }
 
-// Проверка на столкновение змейки с границами или самой собой
+
 function checkCollision() {
   const head = snake[0];
   return (
@@ -63,46 +85,103 @@ function checkCollision() {
   );
 }
 
-// Генерация еды в случайной позиции
+
 function generateFood() {
   food = {
     x: Math.floor(Math.random() * BOARD_SIZE),
     y: Math.floor(Math.random() * BOARD_SIZE)
   };
+  while (snake.some(part => part.x === food.x && part.y === food.y) || badFood.some(b => b.x === food.x && b.y === food.y)) {
+    food = {
+      x: Math.floor(Math.random() * BOARD_SIZE),
+      y: Math.floor(Math.random() * BOARD_SIZE)
+    };
+  }
+
   drawFood();
 }
 
-// Отображение еды на доске
+
 function drawFood() {
   const foodIndex = food.y * BOARD_SIZE + food.x;
   const foodElement = gameBoard.children[foodIndex];
   foodElement.classList.add('food');
 }
 
-// Очистка предыдущей еды перед её новым отображением
+
 function clearFood() {
   [...gameBoard.children].forEach(cell => cell.classList.remove('food'));
 }
 
-// Запуск игры
+function generateBadFood() {
+  let newBadFood = {
+    x: Math.floor(Math.random() * BOARD_SIZE),
+    y: Math.floor(Math.random() * BOARD_SIZE)
+  };
+
+ 
+  while ((newBadFood.x === food.x && newBadFood.y === food.y) ||
+         snake.some(part => part.x === newBadFood.x && part.y === newBadFood.y)) {
+    newBadFood = {
+      x: Math.floor(Math.random() * BOARD_SIZE),
+      y: Math.floor(Math.random() * BOARD_SIZE)
+    };
+  }
+  
+  badFood.push(newBadFood);
+  drawBadFood();
+}
+
+function drawBadFood() {
+  badFood.forEach(bad => {
+    const badFoodIndex = bad.y * BOARD_SIZE + bad.x;
+    const badFoodElement = gameBoard.children[badFoodIndex];
+    badFoodElement.classList.add('bad-food');
+  });
+}
+
+
+function clearBadFood() {
+  [...gameBoard.children].forEach(cell => cell.classList.remove('bad-food'));
+}
+
+function resetGame() {
+  
+  createBoard();
+
+ 
+  scoreDisplay.textContent = 0; 
+  score = 0;
+  direction = { x: 0, y: 0 }; 
+  clearInterval(gameInterval); 
+  snake = []; 
+  food = {}; 
+  badFood = []; 
+  startButton.style.display = 'block';
+}
+
 function startGame() {
   snake = [{ x: 10, y: 10 }];
   direction = { x: 0, y: 0 };
   score = 0;
+  badFood = [];
   scoreDisplay.textContent = score;
   createBoard();
   generateFood();
+  drawSnake();
   gameInterval = setInterval(() => {
-    clearSnake();
-    moveSnake();
+    clearSnake(); 
+    clearBadFood();
+    moveSnake();  
     clearFood();
-    drawSnake();
-    drawFood();
+    drawSnake();  
+    drawFood();  
+    drawBadFood(); 
   }, SNAKE_SPEED);
   startButton.style.display = 'none';
 }
 
-// Управление направлениями змейки
+
 window.addEventListener('keydown', event => {
   switch (event.key) {
     case 'ArrowUp':
@@ -120,7 +199,7 @@ window.addEventListener('keydown', event => {
   }
 });
 
-// Кнопка для начала игры
+
 startButton.addEventListener('click', startGame);
 const canvas = document.getElementById('snake-canvas');
 const ctx = canvas.getContext('2d');
@@ -133,28 +212,28 @@ class SquareSnake {
     constructor() {
       this.x = Math.floor(Math.random() * canvas.width);
       this.y = Math.floor(Math.random() * canvas.height);
-      this.size = Math.floor(Math.random() * 20 + 5); // Размер клетки
-      this.length = Math.floor(Math.random() * 10 + 5); // Длина змеи
-      this.direction = this.getRandomDirection(); // Направление змеи
+      this.size = Math.floor(Math.random() * 20 + 5); 
+      this.length = Math.floor(Math.random() * 10 + 5); 
+      this.direction = this.getRandomDirection(); 
       this.body = Array.from({ length: this.length }, () => ({ x: this.x, y: this.y }));
-      this.moveInterval = 0; // Таймер для поворота
-      this.moveDelay = 1000; // Интервал движения
-      this.speed = 1; // Скорость, кратная размеру клетки
+      this.moveInterval = 0; 
+      this.moveDelay = 1000;
+      this.speed = 1; 
     }
   
-    // Генерация случайного направления
+    
     getRandomDirection() {
       const directions = [
-        { x: 1, y: 0 }, // вправо
-        { x: -1, y: 0 }, // влево
-        { x: 0, y: 1 }, // вниз
-        { x: 0, y: -1 } // вверх
+        { x: 1, y: 0 }, 
+        { x: -1, y: 0 }, 
+        { x: 0, y: 1 }, 
+        { x: 0, y: -1 } 
       ];
       return directions[Math.floor(Math.random() * directions.length)];
     }
   
     update() {
-      // Таймер для смены направления
+      
       if (this.moveInterval >= this.moveDelay) {
         this.direction = this.getRandomDirection();
         this.moveInterval = 0;
@@ -163,17 +242,17 @@ class SquareSnake {
         this.moveInterval++;
       }
   
-      // Перемещение змеи
+      
       const newHead = {
         x: this.body[0].x + this.direction.x * this.size,
         y: this.body[0].y + this.direction.y * this.size
       };
   
-      // Проверка на столкновение с краями холста
+      
       if (newHead.x < 0 || newHead.x > canvas.width || newHead.y < 0 || newHead.y > canvas.height) {
-        this.direction = this.getRandomDirection(); // Изменяем направление при столкновении
+        this.direction = this.getRandomDirection(); 
       } else {
-        // Добавляем новый сегмент головы и удаляем последний сегмент
+        
         this.body.unshift(newHead);
         if (this.body.length > this.length) {
           this.body.pop();
@@ -182,8 +261,8 @@ class SquareSnake {
     }
   
     draw() {
-      ctx.fillStyle = 'green'; // Цвет змеи
-      ctx.strokeStyle = 'black'; // Рамка змеи
+      ctx.fillStyle = 'green'; 
+      ctx.strokeStyle = 'black'; 
   
       this.body.forEach(segment => {
         ctx.fillRect(segment.x, segment.y, this.size, this.size);
@@ -192,14 +271,14 @@ class SquareSnake {
     }
   }
   
-  // Создаем змей для фона
+  
   const backgroundSnakes = [];
   for (let i = 0; i < 10; i++) {
     backgroundSnakes.push(new SquareSnake());
   }
   let lastUpdateTime = 0;
 const updateInterval = 500;
-  // Анимация змей на фоне
+  
   function animateBackground() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
@@ -212,4 +291,3 @@ const updateInterval = 500;
   }
   
   animateBackground();
-  

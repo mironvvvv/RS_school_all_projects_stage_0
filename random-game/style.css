@@ -58,9 +58,10 @@ body {
     text-shadow: 0 0 10px rgba(40, 167, 69, 0.7);
   }
   .start-btn {
-    position: absolute; /* Абсолютное позиционирование */
-    top: 50%; /* Центрируем по вертикали */
-    left: 50%; /* Центрируем по горизонтали */
+    
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
     transform: translate(-50%, -50%);
   }
   button {
@@ -80,7 +81,7 @@ body {
   button:hover {
     background-color: rgba(40, 167, 69, 1);
     box-shadow: 0 0 20px rgba(40, 167, 69, 1), 0 0 30px rgba(40, 167, 69, 0.8), 0 0 40px rgba(40, 167, 69, 0.6);
-    transform: translate(-50%, -50%) scale(1.05); /* Немного увеличиваем кнопку при наведении */
+    transform: translate(-50%, -50%) scale(1.05); 
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
   }
   
@@ -111,3 +112,6 @@ footer a:hover {
     background-repeat: no-repeat;
 }  
   
+.bad-food {
+  background-color: purple; 
+}

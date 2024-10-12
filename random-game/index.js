@@ -10,6 +10,9 @@ let food = { x: 15, y: 15 };
 let score = 0;
 let gameInterval;
 let badFood = [];
+let blackFood = [];
+let lastBlackFoodScore = 100;
+
 
 
 function createBoard() {
@@ -19,7 +22,6 @@ function createBoard() {
     cell.classList.add('cell');
     gameBoard.appendChild(cell);
   }
-  startButton.style.display = 'block';
 }
 
 
@@ -41,38 +43,65 @@ function moveSnake() {
   const newHead = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
   snake.unshift(newHead);
 
- 
+  // Проверяем, съела ли змейка съедобную еду
   if (newHead.x === food.x && newHead.y === food.y) {
     score += 10;
     scoreDisplay.textContent = score;
-    generateFood(); 
+    generateFood(); // Генерация новой съедобной еды
 
-    
-    if (score >= 100) {
-      generateBadFood(); 
+    // Если счет больше или равен 100, добавляем несъедобную еду
+    if (score >= 50) {
+      generateBadFood(); // Генерируем одну несъедобную еду
     }
   } else {
-    snake.pop();
+    snake.pop(); // Удаляем последний сегмент, если еда не съедена
+  }
+  if (score >= 100 && score - lastBlackFoodScore >= 50) {
+    generateBlackFood(); // Добавляем одну черную еду
+    lastBlackFoodScore = score; // Обновляем счет для отслеживания добавления черной еды
   }
 
-  
+  // Проверяем на столкновение с несъедобной едой
   badFood.forEach((bad) => {
     if (newHead.x === bad.x && newHead.y === bad.y) {
-      score = Math.max(0, score - 20);
+      score = Math.max(0, score - 10);
       scoreDisplay.textContent = score;
 
-      
+      // Удаляем несъедобную еду после её поедания
       badFood = badFood.filter(b => b !== bad);
       generateBadFood();
+
+      // Уменьшаем длину змейки, если есть что уменьшать
+      if (snake.length > 1) {
+        snake.pop();
+      }
+
+      // Если счёт достиг 0, завершаем игру
+      if (score === 0) {
+        clearInterval(gameInterval);
+        alert('Game Over! Your score is: ' + score);
+        
+      }
     }
   });
 
   if (checkCollision()) {
     clearInterval(gameInterval);
     alert('Game Over! Your score is: ' + score);
-    resetGame(); 
+    
+  }
+  if (checkCollision() || blackFood.some(black => newHead.x === black.x && newHead.y === black.y)) {
+    clearInterval(gameInterval);
+    endGame(score); // Передаем счёт в функцию завершения игры
   }
   
+  blackFood.forEach((black) => {
+    if (newHead.x === black.x && newHead.y === black.y) {
+      clearInterval(gameInterval);
+      alert('Game Over! You ate the deadly food!');
+       
+    }
+  });
 }
 
 
@@ -145,19 +174,85 @@ function clearBadFood() {
   [...gameBoard.children].forEach(cell => cell.classList.remove('bad-food'));
 }
 
-function resetGame() {
-  
-  createBoard();
+function generateBlackFood() {
+  let newBlackFood = {
+    x: Math.floor(Math.random() * BOARD_SIZE),
+    y: Math.floor(Math.random() * BOARD_SIZE),
+  };
 
- 
-  scoreDisplay.textContent = 0; 
-  score = 0;
-  direction = { x: 0, y: 0 }; 
-  clearInterval(gameInterval); 
-  snake = []; 
-  food = {}; 
-  badFood = []; 
-  startButton.style.display = 'block';
+  // Убедимся, что черная еда не генерируется на месте змейки или другой еды
+  while (
+    snake.some(part => part.x === newBlackFood.x && part.y === newBlackFood.y) ||
+    badFood.some(b => b.x === newBlackFood.x && b.y === newBlackFood.y) ||
+    (newBlackFood.x === food.x && newBlackFood.y === food.y)
+  ) {
+    newBlackFood = {
+      x: Math.floor(Math.random() * BOARD_SIZE),
+      y: Math.floor(Math.random() * BOARD_SIZE),
+    };
+  }
+
+  blackFood.push(newBlackFood); // Добавляем новую черную еду в массив
+  drawBlackFood();
+}
+
+function drawBlackFood() {
+  blackFood.forEach(black => {
+    const blackFoodIndex = black.y * BOARD_SIZE + black.x;
+    const blackFoodElement = gameBoard.children[blackFoodIndex];
+    blackFoodElement.classList.add('black-food'); // Добавьте класс для черной еды
+  });
+}
+function getScores() {
+  let scores = localStorage.getItem('scores');
+  return scores ? JSON.parse(scores) : [];
+}
+
+// Функция для сохранения результата
+function saveScore(score, playerName) {
+  let scores = getScores();
+  const newScore = { score: score, name: playerName, date: new Date().toLocaleDateString() };
+  if (scores.length >= 10) {
+    scores = []; // Очищаем массив
+}
+  scores.push(newScore);
+
+  // Сортируем по убыванию счета
+  scores.sort((a, b) => b.score - a.score);
+
+  // Ограничиваем до 10 результатов
+  if (scores.length > 10) {
+    scores = scores.slice(0, 10);
+  }
+
+  localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+// Функция для отображения результатов
+function displayScores() {
+  const scores = getScores();
+  const scoreTable = document.getElementById('score-table');
+  const tbody = scoreTable.querySelector('tbody'); // Получаем тело таблицы
+  tbody.innerHTML = '';
+
+  scores.forEach((scoreEntry, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${scoreEntry.name}</td>
+      <td>${scoreEntry.score}</td>
+      <td>${scoreEntry.date}</td>
+    `;
+    scoreTable.appendChild(row);
+  });
+}
+
+// После завершения игры
+function endGame(finalScore) {
+  const playerName = prompt("Enter your name:"); // Запрос имени игрока
+  saveScore(finalScore, playerName); // Сохранение результата
+  displayScores(); // Отображение таблицы результатов
+  startGame ();
 }
 
 function startGame() {
@@ -176,7 +271,8 @@ function startGame() {
     clearFood();
     drawSnake();  
     drawFood();  
-    drawBadFood(); 
+    drawBadFood();
+    drawBlackFood(); 
   }, SNAKE_SPEED);
   startButton.style.display = 'none';
 }

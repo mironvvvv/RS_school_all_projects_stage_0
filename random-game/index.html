@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/img/icons8-змея-50.png">
+</head>
+<body>
+    <canvas id="snake-canvas"></canvas>
+
+  <header>
+    <h1>Snake Game</h1>
+  </header>
+
+  <main>
+   
+    <table id="score-table">
+      <caption>Table score</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Score</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <div id="game-board"><button id="start-btn" class="start-btn">Start Game</button></div>
+    <div id="game-info">
+      <p>Score: <span id="score">0</span></p>
+      
+    </div>
+  </main>
+
+  <footer>
+    <div>© 2024 <a href="https://github.com/mironvvvv" class="github-nav-link" target="_blank">mironvvvv</a></div>
+    <a href="https://rs.school/courses/javascript-preschool-ru" class="logo" target="_blank"></a>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>

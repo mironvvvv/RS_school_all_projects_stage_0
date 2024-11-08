@@ -9,19 +9,19 @@ Key skills:
 - Exporting styles and graphics from Figma;
 - Using JavaScript to implement the functionality specified in the task.
 
-Deploy - https://mironvvvv.github.io/RS_school_all_projects_stage_0/shelter-week-1/main.html
+[Deploy](https://mironvvvv.github.io/RS_school_all_projects_stage_0/shelter-week-1/main.html)
 
 2. **Audio-player**.
 A music player that allows playing music tracks sequentially or skipping between them by clicking buttons. Each music track has a corresponding background image.
 
-Deploy - https://mironvvvv.github.io/RS_school_all_projects_stage_0/js301.2-audio-player/index.html
+[Deploy](https://mironvvvv.github.io/RS_school_all_projects_stage_0/js301.2-audio-player/index.html)
 
 3. **Image-gallery**.
 This is an app that displays photos fetched from an Unsplash API. When a search query is entered, the displayed photos are updated accordingly.
 
-Deploy - https://mironvvvv.github.io/RS_school_all_projects_stage_0/js302.2-image-gallery/index.html
+[Deploy](https://mironvvvv.github.io/RS_school_all_projects_stage_0/js302.2-image-gallery/index.html)
 
 4. **Random-game**.
 This is a classic Snake game, with specific game logic and traps.
 
-Deploy - https://mironvvvv.github.io/RS_school_all_projects_stage_0/random-game/index.html
+[Deploy](https://mironvvvv.github.io/RS_school_all_projects_stage_0/random-game/index.html)
